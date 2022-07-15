@@ -32,17 +32,17 @@ bool Trie::keywordExists(const std::string& s)
   return temp->word;
 }
 
-// FIXME: Change it to use std::optional
-TokenType Trie::getKeywordType(const std::string& s)
+std::optional<TokenType> Trie::getType(const std::string& s)
 {
-  Node * temp = root;
+  Node * temp = root; 
 
   for (const char& c : s)
   {
     if (temp->children[c] == nullptr)
-      break;
+      return {};
 
     temp = temp->children[c];
   }
   return temp->type;
 }
+

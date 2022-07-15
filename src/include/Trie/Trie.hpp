@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <optional>
 
 #include "Node/Node.hpp"
 
@@ -10,7 +11,7 @@ public:
     Trie();
     void insertKeyword(const std::string&, TokenType);
     bool keywordExists(const std::string&);
-    TokenType getKeywordType(const std::string&);
+    std::optional<TokenType> getType(const std::string&);
 private:
     Node * root;
 };
