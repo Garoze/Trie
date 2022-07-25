@@ -7,7 +7,7 @@ SRC    := src
 BUILD  := build
 
 SOURCES  := $(shell find $(SRC/**) -type f -regex ".*\.cpp")
-HEADERS := $(shell find $(SRC/include/**) -type f -regex ".*\.hpp")
+HEADERS  := $(shell find $(SRC/include/**) -type f -regex ".*\.hpp")
 OBJECTS  := $(patsubst %, $(BUILD)/%, $(notdir $(SOURCES:.cpp=.cpp.o)))
 
 .PHONY: default config all clean
