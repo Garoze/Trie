@@ -6,9 +6,9 @@ CFLAGS := -w -g -Wall -std=c++17
 SRC    := src
 BUILD  := build
 
-SOURCES := $(shell find $(SRC/**) -type f -regex ".*\.cpp")
+SOURCES  := $(shell find $(SRC/**) -type f -regex ".*\.cpp")
 HEADERS := $(shell find $(SRC/include/**) -type f -regex ".*\.hpp")
-OBJECTS := $(patsubst %, $(BUILD)/%, $(notdir $(SOURCES:.cpp=.cpp.o)))
+OBJECTS  := $(patsubst %, $(BUILD)/%, $(notdir $(SOURCES:.cpp=.cpp.o)))
 
 .PHONY: default config all clean
 
@@ -19,12 +19,12 @@ all: $(TARGET)
 $(BUILD)/%.cpp.o: $(SRC)/%.cpp $(HEADERS)
 	@echo "Building: $@"; $(CC) $(CFLAGS) $(INC) -o $@ -c $<
 
-$(TARGET): $(OBJECT)
+$(TARGET): $(OBJECTS)
 	@echo "Linking: $@"; $(CC) $^ -o $(TARGET) $(LIB)
 
 config: $(eval SHELL:=/usr/bin/env bash)
 	@echo $(shell ./configure.sh)
 
 clean:
-	@echo "Cleaning $(TARGET), $(BUILD)"; $(RM) -rf $(OBJECT) $(TARGET)
+	@echo "Cleaning $(TARGET), $(BUILD)"; $(RM) -rf $(OBJECTS) $(TARGET)
 
